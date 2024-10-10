@@ -214,7 +214,7 @@ config.DrawWindow = function(us)
             imgui.EndChild();
         end
         if (imgui.CollapsingHeader("Party List")) then
-            imgui.BeginChild("PartyListSettings", { 0, 580 }, true);
+            imgui.BeginChild("PartyListSettings", { 0, 460 }, true);
             if (imgui.Checkbox('Enabled', { gConfig.showPartyList })) then
                 gConfig.showPartyList = not gConfig.showPartyList;
                 UpdateSettings();
@@ -247,19 +247,8 @@ config.DrawWindow = function(us)
                 gConfig.partyListExpandHeight = not gConfig.partyListExpandHeight;
                 UpdateSettings();
             end
-            local minRows = { gConfig.partyListMinRows };
-            if (imgui.SliderInt('Min Rows', minRows, 1, 6)) then
-                gConfig.partyListMinRows = minRows[1];
-                UpdateSettings();
-            end
-            local scaleX = { gConfig.partyListScaleX };
-            if (imgui.SliderFloat('Scale X', scaleX, 0.1, 3.0, '%.2f')) then
-                gConfig.partyListScaleX = scaleX[1];
-                UpdateSettings();
-            end
-            local scaleY = { gConfig.partyListScaleY };
-            if (imgui.SliderFloat('Scale Y', scaleY, 0.1, 3.0, '%.2f')) then
-                gConfig.partyListScaleY = scaleY[1];
+            if (imgui.Checkbox('Alliance Windows', { gConfig.partyListAlliance })) then
+                gConfig.partyListAlliance = not gConfig.partyListAlliance;
                 UpdateSettings();
             end
 
@@ -351,21 +340,140 @@ config.DrawWindow = function(us)
             end
 
             local buffScale = { gConfig.partyListBuffScale };
-            if (imgui.SliderFloat('Icon Scale', buffScale, 0.1, 3.0, '%.1f')) then
+            if (imgui.SliderFloat('Status Icon Scale', buffScale, 0.1, 3.0, '%.1f')) then
                 gConfig.partyListBuffScale = buffScale[1];
                 UpdateSettings();
             end
-            local fontOffset = { gConfig.partyListFontOffset };
-            if (imgui.SliderInt('Font Scale', fontOffset, -5, 10)) then
-                gConfig.partyListFontOffset = fontOffset[1];
-                UpdateSettings();
-            end
-            local entrySpacing = { gConfig.partyListEntrySpacing };
-            if (imgui.SliderInt('Entry Spacing', entrySpacing, -20, 20)) then
-                gConfig.partyListEntrySpacing = entrySpacing[1];
-                UpdateSettings();
-            end
             imgui.EndChild();
+
+            if true then
+                imgui.BeginChild('PartyListSettings.Party1', { 0, 230 }, true);
+                imgui.Text('Party');
+
+                if (imgui.Checkbox('Show TP', { gConfig.partyListTP })) then
+                    gConfig.partyListTP = not gConfig.partyListTP;
+                    UpdateSettings();
+                end
+
+                local minRows = { gConfig.partyListMinRows };
+                if (imgui.SliderInt('Min Rows', minRows, 1, 6)) then
+                    gConfig.partyListMinRows = minRows[1];
+                    UpdateSettings();
+                end
+
+                local scaleX = { gConfig.partyListScaleX };
+                if (imgui.SliderFloat('Scale X', scaleX, 0.1, 3.0, '%.2f')) then
+                    gConfig.partyListScaleX = scaleX[1];
+                    UpdateSettings();
+                end
+                local scaleY = { gConfig.partyListScaleY };
+                if (imgui.SliderFloat('Scale Y', scaleY, 0.1, 3.0, '%.2f')) then
+                    gConfig.partyListScaleY = scaleY[1];
+                    UpdateSettings();
+                end
+
+                local fontOffset = { gConfig.partyListFontOffset };
+                if (imgui.SliderInt('Font Scale', fontOffset, -5, 10)) then
+                    gConfig.partyListFontOffset = fontOffset[1];
+                    UpdateSettings();
+                end
+
+                local jobIconScale = { gConfig.partyListJobIconScale };
+                if (imgui.SliderFloat('Job Icon Scale', jobIconScale, 0.1, 3.0, '%.1f')) then
+                    gConfig.partyListJobIconScale = jobIconScale[1];
+                    UpdateSettings();
+                end
+
+                local entrySpacing = { gConfig.partyListEntrySpacing };
+                if (imgui.SliderInt('Entry Spacing', entrySpacing, -20, 20)) then
+                    gConfig.partyListEntrySpacing = entrySpacing[1];
+                    UpdateSettings();
+                end
+
+                imgui.EndChild();
+            end
+
+            if (gConfig.partyListAlliance) then
+                imgui.BeginChild('PartyListSettings.Party2', { 0, 205 }, true);
+                imgui.Text('Party B (Alliance)');
+
+                if (imgui.Checkbox('Show TP', { gConfig.partyList2TP })) then
+                    gConfig.partyList2TP = not gConfig.partyList2TP;
+                    UpdateSettings();
+                end
+
+                local scaleX = { gConfig.partyList2ScaleX };
+                if (imgui.SliderFloat('Scale X', scaleX, 0.1, 3.0, '%.2f')) then
+                    gConfig.partyList2ScaleX = scaleX[1];
+                    UpdateSettings();
+                end
+                local scaleY = { gConfig.partyList2ScaleY };
+                if (imgui.SliderFloat('Scale Y', scaleY, 0.1, 3.0, '%.2f')) then
+                    gConfig.partyList2ScaleY = scaleY[1];
+                    UpdateSettings();
+                end
+
+                local fontOffset = { gConfig.partyList2FontOffset };
+                if (imgui.SliderInt('Font Scale', fontOffset, -5, 10)) then
+                    gConfig.partyList2FontOffset = fontOffset[1];
+                    UpdateSettings();
+                end
+
+                local jobIconScale = { gConfig.partyList2JobIconScale };
+                if (imgui.SliderFloat('Job Icon Scale', jobIconScale, 0.1, 3.0, '%.1f')) then
+                    gConfig.partyList2JobIconScale = jobIconScale[1];
+                    UpdateSettings();
+                end
+
+                local entrySpacing = { gConfig.partyList2EntrySpacing };
+                if (imgui.SliderInt('Entry Spacing', entrySpacing, -20, 20)) then
+                    gConfig.partyList2EntrySpacing = entrySpacing[1];
+                    UpdateSettings();
+                end
+
+                imgui.EndChild();
+            end
+
+            if (gConfig.partyListAlliance) then
+                imgui.BeginChild('PartyListSettings.Party3', { 0, 205 }, true);
+                imgui.Text('Party C (Alliance)');
+
+                if (imgui.Checkbox('Show TP', { gConfig.partyList3TP })) then
+                    gConfig.partyList3TP = not gConfig.partyList3TP;
+                    UpdateSettings();
+                end
+
+                local scaleX = { gConfig.partyList3ScaleX };
+                if (imgui.SliderFloat('Scale X', scaleX, 0.1, 3.0, '%.2f')) then
+                    gConfig.partyList3ScaleX = scaleX[1];
+                    UpdateSettings();
+                end
+                local scaleY = { gConfig.partyList3ScaleY };
+                if (imgui.SliderFloat('Scale Y', scaleY, 0.1, 3.0, '%.2f')) then
+                    gConfig.partyList3ScaleY = scaleY[1];
+                    UpdateSettings();
+                end
+
+                local fontOffset = { gConfig.partyList3FontOffset };
+                if (imgui.SliderInt('Font Scale', fontOffset, -5, 10)) then
+                    gConfig.partyList3FontOffset = fontOffset[1];
+                    UpdateSettings();
+                end
+
+                local jobIconScale = { gConfig.partyList3JobIconScale };
+                if (imgui.SliderFloat('Job Icon Scale', jobIconScale, 0.1, 3.0, '%.1f')) then
+                    gConfig.partyList3JobIconScale = jobIconScale[1];
+                    UpdateSettings();
+                end
+
+                local entrySpacing = { gConfig.partyList3EntrySpacing };
+                if (imgui.SliderInt('Entry Spacing', entrySpacing, -20, 20)) then
+                    gConfig.partyList3EntrySpacing = entrySpacing[1];
+                    UpdateSettings();
+                end
+
+                imgui.EndChild();
+            end
         end
         if (imgui.CollapsingHeader("Exp Bar")) then
             imgui.BeginChild("ExpBarSettings", { 0, 300 }, true);
