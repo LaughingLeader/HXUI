@@ -562,6 +562,10 @@ config.DrawWindow = function(us)
                 gConfig.inventoryShowCount = not gConfig.inventoryShowCount;
                 UpdateSettings();
             end
+            if (imgui.Checkbox('Show Grid', { gConfig.inventoryShowGrid })) then
+                gConfig.inventoryShowGrid = not gConfig.inventoryShowGrid;
+                UpdateSettings();
+            end
             local columnCount = { gConfig.inventoryTrackerColumnCount };
             if (imgui.SliderInt('Columns', columnCount, 1, 80)) then
                 gConfig.inventoryTrackerColumnCount = columnCount[1];

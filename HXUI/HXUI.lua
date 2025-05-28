@@ -166,6 +166,7 @@ T{
     inventoryTrackerColumnCount = 5,
     inventoryTrackerRowCount = 6,
     inventoryShowCount = true,
+    inventoryShowGrid = true,
 
 	partyListScaleX = 1,
 	partyListScaleY = 1,
@@ -670,7 +671,6 @@ local function CheckVisibility()
 end
 
 local function ForceHide()
-
 	playerBar.SetHidden(true);
 	targetBar.SetHidden(true);
 	expBar.SetHidden(true);
@@ -760,6 +760,7 @@ local function UpdateUserSettings()
     gAdjustedSettings.inventoryTrackerSettings.rowCount = us.inventoryTrackerRowCount;
     gAdjustedSettings.inventoryTrackerSettings.opacity = us.inventoryTrackerOpacity;
     gAdjustedSettings.inventoryTrackerSettings.showText = us.inventoryShowCount;
+    gAdjustedSettings.inventoryTrackerSettings.showGrid = us.inventoryShowGrid;
 
 	-- Enemy List
 	gAdjustedSettings.enemyListSettings.barWidth = ds.enemyListSettings.barWidth * us.enemyListScaleX;
