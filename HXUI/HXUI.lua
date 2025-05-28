@@ -844,15 +844,21 @@ local function GetInterfaceHidden()
     return (ashita.memory.read_uint8(ptr + 0xB4) == 1);
 end
 
+local hideInMenu = {"fulllog", "map"}
+
 function GetHidden()
 
 	if (gConfig.hideDuringEvents and GetEventSystemActive()) then
     	return true;
     end
 
-	if (string.match(GetMenuName(), 'map')) then
-		return true;
+	local menuName = GetMenuName()
+	for _,v in pairs(hideInMenu) do
+		if (string.match(menuName, v)) then
+			return true;
+		end
 	end
+	
 
     if (GetInterfaceHidden()) then
         return true;
