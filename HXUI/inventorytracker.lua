@@ -73,8 +73,6 @@ inventoryTracker.DrawWindow = function(settings)
 		if showConfig[1] then
 			--Display dummy size when previewing
 			imgui.PushStyleColor(ImGuiCol_WindowBg, {0,0.06,.16,.9});
-			--imgui.PushStyleColor(ImGuiCol_FrameBg, {0,0.06,.16, 1});
-			
 			windowFlags = bit.bor(ImGuiWindowFlags_NoDecoration, ImGuiWindowFlags_AlwaysAutoResize, ImGuiWindowFlags_NoFocusOnAppearing, ImGuiWindowFlags_NoNav, ImGuiWindowFlags_NoBringToFrontOnFocus);
 		end
 	end
@@ -123,6 +121,9 @@ inventoryTracker.DrawWindow = function(settings)
             UpdateTextVisibility(false);
         end
     end
+	if showConfig[1] then
+		imgui.PopStyleColor(1);
+	end
 	imgui.End();
 end
 
